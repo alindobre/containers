@@ -10,6 +10,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "contain.h"
+#include "util.h"
 
 static char *getmap(pid_t pid, int type) {
   char *line = NULL, *result = NULL, *path;

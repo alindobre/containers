@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "contain.h"
+#include "util.h"
 
 char *append(char **destination, const char *format, ...) {
   char *extra, *result;

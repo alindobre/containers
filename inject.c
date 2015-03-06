@@ -86,9 +86,11 @@ int main(int argc, char **argv) {
     error(1, 0, "setgid installation is unsafe");
 
   join(parent, "user");
-  setgid(0);
+  if (!setgid(0))
+    error(1, 0, "Failed to setgid");
   setgroups(0, NULL);
-  setuid(0);
+  if (!setuid(0))
+    error(1, 0, "Failed to setuid");
 
   if (!(dir = opendir("/proc")))
     error(1, 0, "Failed to list processes");

@@ -60,7 +60,8 @@ void createroot(char *src, int console, char *helper) {
   bindnode("/dev/tty", "dev/tty");
   bindnode("/dev/urandom", "dev/urandom");
   bindnode("/dev/zero", "dev/zero");
-  symlink("pts/ptmx", "dev/ptmx");
+  if (!symlink("pts/ptmx", "dev/ptmx"))
+    error(1, 0, "Failed to create the pmtx symlink");
 
   if (helper)
     switch (child = fork()) {

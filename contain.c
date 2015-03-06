@@ -93,9 +93,11 @@ int main(int argc, char **argv) {
   kill(child, SIGCONT);
   waitforexit(child);
 
-  setgid(0);
+  if (!setgid(0))
+    error(1, 0, "Failed to setgid");
   setgroups(0, NULL);
-  setuid(0);
+  if (!setuid(0))
+    error(1, 0, "Failed to setuid");
 
   master = stdio ? -1 : getconsole();
   createroot(argv[optind], master, inside);
